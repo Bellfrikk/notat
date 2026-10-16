@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+}
+h1{
+  margin:0;
+}
+
+.toppLinje {
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 5px;
+  gap: 6px;
+
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.toppLinje input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 0 10px;
+}
+
+.toppLinje button {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.hovedNotatBoks {
+  position: relative;
+  height: calc(100dvh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: 70vh;
+  box-sizing: border-box;
+  margin: 5px;
+}
+
+.notatBoks {
+  width: 100%;
+  margin: 4px 0;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+
+/* Tittellinje */
+
+.tittelBoks {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 12px 0px 0px 0px;
+  background: rgba(0, 0, 0, 0.062);
+
+  display: flex;
+  align-items: center;
+}
+
+
+/* Tittel */
+
+.tittel {
+  flex: 1;
+  min-width: 0;
+
+  margin: 0;
+  padding: 10px 8px 10px 14px;
+
+  font-size: 1.1em;
+  font-weight: bold;
+
+  outline: none;
+  overflow-wrap: anywhere;
+}
+
+
+/* Knappane */
+
+.vanligKnapp {
+  flex: 0 0 44px;
+
+  width: 44px;
+  height: 44px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0);
+
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.notatLukka{
+  display: none;
+}
+.notatOpent{
+  display: '';
+}
+/* Innhaldet i notatet */
+
+.notat {
+  width: calc(100% - 2px);
+
+  margin-left: 0.5px;
+  margin-top: 2px;
+  padding: 0px;
+}
+
+
+/* Tekst */
+
+.tekst {
+  width: 100%;
+  min-height: 45px;
+
+  padding: 10px;
+
+  outline: none;
+
+  line-height: 1.5;
+
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
