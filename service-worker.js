@@ -10,7 +10,7 @@ const FILER = [
     './service-worker.js',
     './farge.js',
     './henteNotat.js',
-    './tegnNotat',  
+    './tegnNotat.js',  
     './lagreNotat.js',
     './slett.js',
     './slåSamanNotat.js',
