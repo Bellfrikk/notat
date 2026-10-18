@@ -17,6 +17,7 @@ const FILER = [
     './sortereAlfabetisk.js',
     './søk.js',
     './topplinje.js',
+    './googlePålogging.js',
 ];
 
 self.addEventListener('install', event => {
