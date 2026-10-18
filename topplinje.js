@@ -6,9 +6,16 @@ import { tegnNotat } from './tegnNotat.js';
 import { nyFarge } from './farge.js';
 import { søkNotat, nesteTreff } from './søk.js';
 export function lagTopplinje() {
+
     const toppLinje = document.createElement('div');
     toppLinje.className = 'toppLinje';
     document.body.appendChild(toppLinje);
+    
+    const logo = document.createElement('img');
+    logo.src = "/ikon-512.png";
+    logo.className = 'knapp';
+    toppLinje.appendChild(logo);
+    
     const googleKnapp = document.createElement('button');
     googleKnapp.id = 'googleKnapp';
     googleKnapp.textContent = 'G';
