@@ -7,7 +7,7 @@ const FILER = [
     './css.css',
     './manifest.json',
     './hoved.js',
-    './service-worker.js'
+    './service-worker.js',
     './farge.js',
     './henteNotat.js',
     './tegnNotat',  
