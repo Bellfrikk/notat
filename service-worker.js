@@ -1,23 +1,23 @@
 
-const CACHE_NAME = 'notat-v1';
+const CACHE_NAME = 'notat-v4';
 
 const FILER = [
     './',
     './index.html',
     './css.css',
     './manifest.json',
-    './hoved.js',
     './service-worker.js',
-    './farge.js',
-    './henteNotat.js',
-    './tegnNotat.js',  
-    './lagreNotat.js',
-    './slett.js',
-    './slåSamanNotat.js',
-    './sortereAlfabetisk.js',
-    './søk.js',
-    './topplinje.js',
-    './googlePålogging.js',
+    './app/hoved.js',
+    './app/farge.js',
+    './app/henteNotat.js',
+    './app/tegnNotat.js',  
+    './app/lagreNotat.js',
+    './app/slett.js',
+    './app/slåSamanNotat.js',
+    './app/sortereAlfabetisk.js',
+    './app/søk.js',
+    './app/topplinje.js',
+    './app/googlePålogging.js',
 ];
 
 self.addEventListener('install', event => {
@@ -42,7 +42,6 @@ self.addEventListener('activate', event => {
 
     self.clients.claim();
 });
-
 self.addEventListener('fetch', event => {
     if (event.request.method !== 'GET') return;
 
@@ -50,6 +49,32 @@ self.addEventListener('fetch', event => {
 
     if (url.origin !== self.location.origin) return;
 
+    // HTML og CSS: prøv serveren først
+    if (
+        event.request.mode === 'navigate' ||
+        url.pathname.endsWith('.css') ||
+        url.pathname.endsWith('.html')
+    ) {
+        event.respondWith(
+            fetch(event.request)
+                .then(response => {
+                    if (response.ok) {
+                        const kopi = response.clone();
+
+                        caches.open(CACHE_NAME).then(cache =>
+                            cache.put(event.request, kopi)
+                        );
+                    }
+
+                    return response;
+                })
+                .catch(() => caches.match(event.request))
+        );
+
+        return;
+    }
+
+    // Andre filer: bruk cache først
     event.respondWith(
         caches.match(event.request).then(lagra => {
             if (lagra) return lagra;

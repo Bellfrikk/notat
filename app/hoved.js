@@ -4,15 +4,14 @@ import { tegnNotat } from "./tegnNotat.js";
 export function nyId() {
     return crypto.randomUUID();
 }
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-            .catch(feil => {
-                console.error('Service worker-feil:', feil);
-            });
-    });
-}
-
+//if ('serviceWorker' in navigator) {
+//    window.addEventListener('load', () => {
+//        navigator.serviceWorker.register('./service-worker.js')
+//            .catch(feil => {
+//                console.error('Service worker-feil:', feil);
+//            });
+//    });
+//}
 document.addEventListener('DOMContentLoaded', () => {
     start();
 });

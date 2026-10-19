@@ -19,12 +19,21 @@ export function nyFarge(forelderFarge) {
     return fargar[nyFargeNr];
 }
 const fargar = [
-    '#FFF4C2', // gul
-    '#DFF3E3', // grøn
-    '#DDEBF7', // blå
-    '#E8DDF5', // lilla
-    '#F8D9E5', // rosa
-    '#FBE4D5', // fersken
-    '#E5E5E5', // grå
-    '#DDF0EE' // turkis
+    '#FFF4C2', // gulconst fargar = [
+    '#F4D477', // sennepsgul
+    '#C9DFB2', // salviegrøn
+    '#AFCBE8', // stålblå
+    '#C9B5DF', // dempa lilla
+    '#E8B6C4', // gammelrosa
+    '#E9B18C', // terrakotta
+    '#D5D2CB', // steingrå
+    '#A9D5CE', // sjøgrøn
+    '#E9C49A', // sand
+    '#D99A72', // kopar
+    '#B8C6A0', // olivengrøn
+    '#8FB8B0', // mørkare turkis
+    '#D7A9A0', // leirraud
+    '#B6B5D8', // blåfiolett
+    '#E6D7A8', // havregul
+    '#B9C9D9' // skiferblå
 ];

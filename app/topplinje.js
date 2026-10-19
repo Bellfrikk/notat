@@ -6,20 +6,17 @@ import { tegnNotat } from './tegnNotat.js';
 import { nyFarge } from './farge.js';
 import { søkNotat, nesteTreff } from './søk.js';
 export function lagTopplinje() {
-
     const toppLinje = document.createElement('div');
     toppLinje.className = 'toppLinje';
     document.body.appendChild(toppLinje);
-    
     const logo = document.createElement('img');
     logo.src = 'ikon-512.png';
-    logo.className = 'vanligKnapp';
+    logo.className = 'ikon';
     toppLinje.appendChild(logo);
-    
     const googleKnapp = document.createElement('button');
     googleKnapp.id = 'googleKnapp';
     googleKnapp.textContent = 'G';
-    googleKnapp.className = 'vanligKnapp';
+    googleKnapp.className = 'knapp';
     googleKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         startGoogle();
@@ -28,7 +25,7 @@ export function lagTopplinje() {
     // søppel knapp
     const søppelKnapp = document.createElement('button');
     søppelKnapp.textContent = '🗑️';
-    søppelKnapp.className = 'vanligKnapp';
+    søppelKnapp.className = 'knapp';
     søppelKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         notatKnapp.style.display = '';
@@ -41,7 +38,7 @@ export function lagTopplinje() {
     // visnotat knapp
     const notatKnapp = document.createElement('button');
     notatKnapp.textContent = '📚';
-    notatKnapp.className = 'vanligKnapp';
+    notatKnapp.className = 'knapp';
     notatKnapp.style.display = 'none';
     notatKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -55,7 +52,7 @@ export function lagTopplinje() {
     // + knapp
     const nyKnapp = document.createElement('button');
     nyKnapp.textContent = '➕';
-    nyKnapp.className = 'vanligKnapp';
+    nyKnapp.className = 'knapp';
     nyKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         const id = nyId();
@@ -73,8 +70,8 @@ export function lagTopplinje() {
     toppLinje.appendChild(søkefelt);
     const nesteTreffKnapp = document.createElement('button');
     nesteTreffKnapp.id = 'nesteTreff';
-    nesteTreffKnapp.className = 'vanligKnapp';
-    nesteTreffKnapp.textContent = '->';
+    nesteTreffKnapp.className = 'knapp';
+    nesteTreffKnapp.textContent = '🡆';
     nesteTreffKnapp.addEventListener('click', nesteTreff);
     toppLinje.appendChild(nesteTreffKnapp);
 }

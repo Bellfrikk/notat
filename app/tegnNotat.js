@@ -12,16 +12,18 @@ export function tegnNotat(overNotat, forelderData, denneData, type) {
     tittelBoks.addEventListener('click', opneNotat);
     notatBoks.appendChild(tittelBoks);
     function opneNotat() {
-        notatBoks.querySelectorAll('.notatLukka').forEach((knapp) => {
+        tittelBoks.querySelectorAll('.notatLukka').forEach((knapp) => {
             knapp.classList.remove('notatLukka');
             knapp.classList.add('notatOpent');
         });
+        notat.classList.remove('notatLukka');
+        notat.classList.add('notatOpent');
         tittelBoks.removeEventListener('click', opneNotat);
         tittel.contentEditable = 'true';
     }
     // Tilbakeknapp
     const tilbakeKnapp = document.createElement('button');
-    tilbakeKnapp.textContent = '←';
+    tilbakeKnapp.textContent = '🡄';
     tilbakeKnapp.className = 'knapp notatLukka';
     tilbakeKnapp.addEventListener('click', (event) => {
         var _a;
