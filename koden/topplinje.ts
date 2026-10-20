@@ -19,7 +19,7 @@
 
   const googleKnapp = document.createElement('button');
   googleKnapp.id = 'googleKnapp';
-  googleKnapp.textContent = 'G';
+  googleKnapp.style.backgroundImage = 'url(./ikon/sync.png)';
   googleKnapp.className = 'knapp';
   googleKnapp.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -29,7 +29,7 @@
 
  // søppel knapp
   const søppelKnapp = document.createElement('button');
-  søppelKnapp.textContent = '🗑️';
+  søppelKnapp.style.backgroundImage = 'url(./ikon/søppel.png)';
   søppelKnapp.className = 'knapp';
   søppelKnapp.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -43,7 +43,7 @@
 
  // visnotat knapp
   const notatKnapp = document.createElement('button');
-  notatKnapp.textContent = '📚';
+  notatKnapp.style.backgroundImage = 'url(./ikon/notat.png)';
   notatKnapp.className = 'knapp';
   notatKnapp.style.display = 'none';
   notatKnapp.addEventListener('click', (event) => {
@@ -58,7 +58,7 @@
 
    // + knapp
   const nyKnapp = document.createElement('button');
-  nyKnapp.textContent = '➕';
+  nyKnapp.style.backgroundImage = 'url(./ikon/nyttnotat.png)';
   nyKnapp.className = 'knapp';
   nyKnapp.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -79,7 +79,7 @@
   const nesteTreffKnapp = document.createElement('button');
   nesteTreffKnapp.id = 'nesteTreff';
   nesteTreffKnapp.className = 'knapp';
-  nesteTreffKnapp.textContent = '🡆';
+  nesteTreffKnapp.style.backgroundImage = 'url(./ikon/nestepil.png)';
   nesteTreffKnapp.addEventListener('click', nesteTreff);
   toppLinje.appendChild(nesteTreffKnapp);
 }
@@ -88,8 +88,8 @@ export function påLogga(loggaPå:boolean) {
   const googleKnapp = document.getElementById('googleKnapp');
   if (!googleKnapp) return;
   if (loggaPå) {
-    googleKnapp.style.color = '#24e14a';
+    googleKnapp.style.backgroundImage = 'url(./ikon/syncok.png)';
   } else {
-    googleKnapp.style.color = 'red';
+    googleKnapp.style.backgroundImage = 'url(./ikon/sync.png)';
   }
 }

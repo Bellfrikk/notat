@@ -29,7 +29,7 @@ export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat,
 
       // Tilbakeknapp
       const tilbakeKnapp = document.createElement('button');
-      tilbakeKnapp.textContent = '🡄';
+      tilbakeKnapp.style.backgroundImage = 'url(./ikon/tilbake.png)';
       tilbakeKnapp.className = 'knapp notatLukka';
       tilbakeKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -59,7 +59,7 @@ export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat,
 if(type === 'vanlig'){
       // Slettknapp
       const slettKnapp = document.createElement('button');
-      slettKnapp.textContent = '🗑️';
+      slettKnapp.style.backgroundImage = 'url(./ikon/slett.png)';
       slettKnapp.className = 'knapp notatLukka';
       slettKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -70,7 +70,7 @@ if(type === 'vanlig'){
 if(type === 'hovedSøppel'){
       // U slett knapp, skal bare vise i søppel
       const uSlettKnapp = document.createElement('button');
-      uSlettKnapp.textContent = '♻';
+      uSlettKnapp.style.backgroundImage = 'url(./ikon/uSlett.png)';
       uSlettKnapp.className = 'søppelKnapp notatLukka';
       uSlettKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -81,14 +81,14 @@ if(type === 'hovedSøppel'){
 if(type === 'vanlig'){
       // Fargeknapp
       const fargeKnapp = document.createElement('button');
-      fargeKnapp.textContent = '🎨';
+      fargeKnapp.style.backgroundImage = 'url(./ikon/farge.png)';
       fargeKnapp.className = 'knapp notatLukka';
       fargeKnapp.addEventListener('click', (event) => { event.stopPropagation(); endreFarge(denneData, notatBoks); });
       tittelBoks.appendChild(fargeKnapp);
       
       // + knapp
       const nyKnapp = document.createElement('button');
-      nyKnapp.textContent = '➕';
+      nyKnapp.style.backgroundImage = 'url(./ikon/nyttnotat.png)';
       nyKnapp.className = 'knapp notatLukka';
       nyKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
