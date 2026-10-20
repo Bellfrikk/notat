@@ -15,7 +15,7 @@ export function lagTopplinje() {
     toppLinje.appendChild(logo);
     const googleKnapp = document.createElement('button');
     googleKnapp.id = 'googleKnapp';
-    googleKnapp.textContent = 'G';
+    googleKnapp.style.backgroundImage = 'url(./ikon/synk.png)';
     googleKnapp.className = 'knapp';
     googleKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -24,7 +24,7 @@ export function lagTopplinje() {
     toppLinje.appendChild(googleKnapp);
     // søppel knapp
     const søppelKnapp = document.createElement('button');
-    søppelKnapp.textContent = '🗑️';
+    søppelKnapp.style.backgroundImage = 'url(./ikon/slett.png)';
     søppelKnapp.className = 'knapp';
     søppelKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -37,7 +37,7 @@ export function lagTopplinje() {
     toppLinje.appendChild(søppelKnapp);
     // visnotat knapp
     const notatKnapp = document.createElement('button');
-    notatKnapp.textContent = '📚';
+    notatKnapp.style.backgroundImage = 'url(./ikon/notat.png)';
     notatKnapp.className = 'knapp';
     notatKnapp.style.display = 'none';
     notatKnapp.addEventListener('click', (event) => {
@@ -51,7 +51,7 @@ export function lagTopplinje() {
     toppLinje.appendChild(notatKnapp);
     // + knapp
     const nyKnapp = document.createElement('button');
-    nyKnapp.textContent = '➕';
+    nyKnapp.style.backgroundImage = 'url(./ikon/nyttnotat.png)';
     nyKnapp.className = 'knapp';
     nyKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -71,7 +71,7 @@ export function lagTopplinje() {
     const nesteTreffKnapp = document.createElement('button');
     nesteTreffKnapp.id = 'nesteTreff';
     nesteTreffKnapp.className = 'knapp';
-    nesteTreffKnapp.textContent = '🡆';
+    nesteTreffKnapp.style.backgroundImage = 'url(./ikon/nestepil.png)';
     nesteTreffKnapp.addEventListener('click', nesteTreff);
     toppLinje.appendChild(nesteTreffKnapp);
 }
@@ -80,9 +80,9 @@ export function påLogga(loggaPå) {
     if (!googleKnapp)
         return;
     if (loggaPå) {
-        googleKnapp.style.color = '#24e14a';
+        googleKnapp.style.backgroundImage = 'url(./ikon/synkok.png)';
     }
     else {
-        googleKnapp.style.color = 'red';
+        googleKnapp.style.backgroundImage = 'url(./ikon/synk.png)';
     }
 }

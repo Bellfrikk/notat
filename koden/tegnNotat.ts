@@ -29,7 +29,7 @@ export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat,
 
       // Tilbakeknapp
       const tilbakeKnapp = document.createElement('button');
-      tilbakeKnapp.style.backgroundImage = 'url(./ikon/tilbake.png)';
+      tilbakeKnapp.style.backgroundImage = 'url(./ikon/tilbakepil.png)';
       tilbakeKnapp.className = 'knapp notatLukka';
       tilbakeKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -70,7 +70,7 @@ if(type === 'vanlig'){
 if(type === 'hovedSøppel'){
       // U slett knapp, skal bare vise i søppel
       const uSlettKnapp = document.createElement('button');
-      uSlettKnapp.style.backgroundImage = 'url(./ikon/uSlett.png)';
+      uSlettKnapp.style.backgroundImage = 'url(./ikon/uslett.png)';
       uSlettKnapp.className = 'søppelKnapp notatLukka';
       uSlettKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
