@@ -5,8 +5,8 @@ type Notat = {
   farge:string,
   underNotat:Record<string,Notat>,
   tekst:string,
-  sistEndra:number
-  sletta:boolean
+  sistEndra:number,
+  sletta:'ok'|'søppel'|'evigSletta'
 }
 
 type HovedNotat = {

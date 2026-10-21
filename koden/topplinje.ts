@@ -5,6 +5,7 @@
  import { tegnNotat } from './tegnNotat.js';
  import { nyFarge } from './farge.js';
  import { søkNotat, nesteTreff } from './søk.js';
+import { lagTomtNotat } from './lagTomtNotat.js';
 
  export function lagTopplinje() {
  const toppLinje = document.createElement('div');
@@ -63,7 +64,7 @@
   nyKnapp.addEventListener('click', (event) => {
     event.stopPropagation();
     const id:string = nyId();
-    hovedNotat.underNotat[id] = { id:id, tittel:'tittel', farge:nyFarge('#FFFFFF'), underNotat:{}, tekst:'', sistEndra:Date.now() ,sletta:false};
+    hovedNotat.underNotat[id] = lagTomtNotat( id , '#ffffff');
     lagreNotat();
     tegnNotat(hovedNotatBoks,hovedNotat, hovedNotat.underNotat[id], 'vanlig');
   });

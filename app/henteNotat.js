@@ -15,7 +15,7 @@ export function tomtNotat() {
     return { underNotat: {} };
 }
 function hentLokaltNotat() {
-    const data = localStorage.getItem('notato');
+    const data = localStorage.getItem('notat');
     if (data === null)
         return tomtNotat();
     return JSON.parse(data);

@@ -1,7 +1,8 @@
 import { lagreNotat, lagreTittel } from "./lagreNotat.js";
 import { nyId } from "./hoved.js";
-import { endreFarge, nyFarge } from "./farge.js";
-import { slettNotat, uSlettNotat } from "./slett.js";
+import { endreFarge } from "./farge.js";
+import { slettNotat, uSlettNotat, evigSlettNotat } from "./slett.js";
+import { lagTomtNotat } from "./lagTomtNotat.js";
 export function tegnNotat(overNotat, forelderData, denneData, type) {
     const notatBoks = document.createElement('div');
     notatBoks.className = 'notatBoks';
@@ -20,6 +21,7 @@ export function tegnNotat(overNotat, forelderData, denneData, type) {
         notat.classList.add('notatOpent');
         tittelBoks.removeEventListener('click', opneNotat);
         tittel.contentEditable = 'true';
+        tittel.focus();
     }
     // Tilbakeknapp
     const tilbakeKnapp = document.createElement('button');
@@ -62,10 +64,19 @@ export function tegnNotat(overNotat, forelderData, denneData, type) {
         tittelBoks.appendChild(slettKnapp);
     }
     if (type === 'hovedSøppel') {
+        // permanent slett knapp, skal bare vise i søppel
+        const evigSlettKnapp = document.createElement('button');
+        evigSlettKnapp.style.backgroundImage = 'url(./ikon/evigslett.png)';
+        evigSlettKnapp.className = 'knapp notatLukka';
+        evigSlettKnapp.addEventListener('click', (event) => {
+            event.stopPropagation();
+            evigSlettNotat(denneData, notatBoks);
+        });
+        tittelBoks.appendChild(evigSlettKnapp);
         // U slett knapp, skal bare vise i søppel
         const uSlettKnapp = document.createElement('button');
         uSlettKnapp.style.backgroundImage = 'url(./ikon/uslett.png)';
-        uSlettKnapp.className = 'søppelKnapp notatLukka';
+        uSlettKnapp.className = 'knapp notatLukka';
         uSlettKnapp.addEventListener('click', (event) => {
             event.stopPropagation();
             uSlettNotat(denneData, notatBoks);
@@ -86,7 +97,7 @@ export function tegnNotat(overNotat, forelderData, denneData, type) {
         nyKnapp.addEventListener('click', (event) => {
             event.stopPropagation();
             const id = nyId();
-            denneData.underNotat[id] = { id: id, tittel: 'tittel', farge: nyFarge(denneData.farge), underNotat: {}, tekst: '', sistEndra: Date.now(), sletta: false };
+            denneData.underNotat[id] = lagTomtNotat(id, denneData.farge);
             lagreNotat();
             tegnNotat(underNotatBoks, denneData, denneData.underNotat[id], 'vanlig');
         });

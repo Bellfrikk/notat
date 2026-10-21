@@ -1,7 +1,8 @@
 import { lagreNotat, lagreTittel } from "./lagreNotat.js";
 import { nyId } from "./hoved.js";
 import { endreFarge, nyFarge } from "./farge.js";
-import { slettNotat, uSlettNotat } from "./slett.js";
+import { slettNotat, uSlettNotat, evigSlettNotat } from "./slett.js";
+import { lagTomtNotat } from "./lagTomtNotat.js";
 
 export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat, denneData:Notat, type:'vanlig'|'hovedSøppel'|'underSøppel') {
 
@@ -25,6 +26,7 @@ export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat,
     
       tittelBoks.removeEventListener('click', opneNotat);
       tittel.contentEditable = 'true';
+      tittel.focus();
     }
 
       // Tilbakeknapp
@@ -68,10 +70,20 @@ if(type === 'vanlig'){
       tittelBoks.appendChild(slettKnapp);
 }
 if(type === 'hovedSøppel'){
+      // permanent slett knapp, skal bare vise i søppel
+      const evigSlettKnapp = document.createElement('button');
+      evigSlettKnapp.style.backgroundImage = 'url(./ikon/evigslett.png)';
+      evigSlettKnapp.className = 'knapp notatLukka';
+      evigSlettKnapp.addEventListener('click', (event) => {
+        event.stopPropagation();
+        evigSlettNotat(denneData, notatBoks);
+      });
+      tittelBoks.appendChild(evigSlettKnapp);
+
       // U slett knapp, skal bare vise i søppel
       const uSlettKnapp = document.createElement('button');
       uSlettKnapp.style.backgroundImage = 'url(./ikon/uslett.png)';
-      uSlettKnapp.className = 'søppelKnapp notatLukka';
+      uSlettKnapp.className = 'knapp notatLukka';
       uSlettKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         uSlettNotat(denneData, notatBoks);
@@ -93,7 +105,7 @@ if(type === 'vanlig'){
       nyKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         const id:string = nyId();
-        denneData.underNotat[id] = { id:id, tittel:'tittel', farge:nyFarge(denneData.farge), underNotat:{}, tekst:'', sistEndra:Date.now(), sletta:false };
+        denneData.underNotat[id] = lagTomtNotat( id , denneData.farge);
         lagreNotat();
         tegnNotat(underNotatBoks,denneData, denneData.underNotat[id], 'vanlig');
       });

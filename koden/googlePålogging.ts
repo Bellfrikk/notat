@@ -11,25 +11,33 @@ export let filId: string | null = null;
 declare const google: any;
 let tokenClient: any;
 
-export function startGoogle() {
 
+export function startGoogle() {
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
     scope: SCOPES,
     callback: async (response: any) => {
       if (response.error) {
         console.error(response);
+        påLogga(false);
         return;
       }
+
       accessToken = response.access_token;
-      await finnNotatFil();
+
+      try {
+        await finnNotatFil();
+      } catch (feil) {
+        console.error('Feil ved Google Drive:', feil);
+        påLogga(false);
+      }
     }
   });
 
-  if (!tokenClient) startGoogle();
-  tokenClient.requestAccessToken();
+  tokenClient.requestAccessToken({
+    prompt: 'none'
+  });
 }
-
 
 
 async function finnNotatFil() {

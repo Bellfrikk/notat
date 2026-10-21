@@ -4,13 +4,33 @@ export function slåSamanNotat(google, lokalt) {
 }
 function slåSamanUnderNotat(google, lokalt) {
     const resultat = {};
-    const alleIdar = new Set([
+    const alleID = new Set([
         ...Object.keys(google),
         ...Object.keys(lokalt)
     ]);
-    for (const id of alleIdar) {
+    for (const id of alleID) {
         const googleNotat = google[id];
         const lokaltNotat = lokalt[id];
+        if (googleNotat) {
+            //endre fra boolen til teks pga kompabilitet
+            if (googleNotat.sletta === true)
+                googleNotat.sletta = 'søppel';
+            else if (googleNotat.sletta === false)
+                googleNotat.sletta = 'ok';
+            // vil ikkje ha notat som er evig sletta
+            if (googleNotat.sletta === 'evigSletta')
+                continue;
+        }
+        if (lokaltNotat) {
+            if (lokaltNotat.sletta === true)
+                lokaltNotat.sletta = 'søppel';
+            else if (lokaltNotat && lokaltNotat.sletta === false)
+                lokaltNotat.sletta = 'ok';
+            // vil ikkje ha notat som er evig sletta
+            if (lokaltNotat.sletta === 'evigSletta')
+                continue;
+        }
+        // vil ikkje ha notat som er evig sletta
         // Berre på Google
         if (!lokaltNotat) {
             resultat[id] = structuredClone(googleNotat);

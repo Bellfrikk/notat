@@ -30,7 +30,7 @@ export function tegnVanligeNotat() {
     if (undernotatListe.length > 0) {
         undernotatListe.forEach((id) => {
             //lag alle notat som ikkje er merka som sletta
-            if (!hovedNotat.underNotat[id].sletta) {
+            if (hovedNotat.underNotat[id].sletta === 'ok') {
                 tegnNotat(hovedNotatBoks, hovedNotat, hovedNotat.underNotat[id], 'vanlig');
             }
         });
@@ -44,7 +44,7 @@ export function tegnSøppelNotat() {
     if (undernotatListe.length > 0) {
         undernotatListe.forEach((id) => {
             //lag alle notat som er merka som sletta
-            if (hovedNotat.underNotat[id].sletta) {
+            if (hovedNotat.underNotat[id].sletta === 'søppel') {
                 tegnNotat(hovedNotatBoks, hovedNotat, hovedNotat.underNotat[id], 'hovedSøppel');
             }
         });

@@ -20,7 +20,7 @@ export function tomtNotat() {
 
 
 function hentLokaltNotat():HovedNotat {
-  const data = localStorage.getItem('notato');
+  const data = localStorage.getItem('notat');
 
   if (data === null) return tomtNotat();
 

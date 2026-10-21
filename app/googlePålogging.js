@@ -12,15 +12,22 @@ export function startGoogle() {
         callback: async (response) => {
             if (response.error) {
                 console.error(response);
+                påLogga(false);
                 return;
             }
             accessToken = response.access_token;
-            await finnNotatFil();
+            try {
+                await finnNotatFil();
+            }
+            catch (feil) {
+                console.error('Feil ved Google Drive:', feil);
+                påLogga(false);
+            }
         }
     });
-    if (!tokenClient)
-        startGoogle();
-    tokenClient.requestAccessToken();
+    tokenClient.requestAccessToken({
+        prompt: 'none'
+    });
 }
 async function finnNotatFil() {
     if (!accessToken) {

@@ -6,7 +6,8 @@ export function lagreNotat() {
     lagreTilGoogleDrive(hovedNotat);
 }
 function lagreLokalt(data) {
-    localStorage.setItem('notato', JSON.stringify(data));
+    localStorage.setItem('notat', JSON.stringify(data));
+    console.log('lagra lokalt');
 }
 async function lagreTilGoogleDrive(data) {
     if (!accessToken || !filId)
@@ -17,6 +18,7 @@ async function lagreTilGoogleDrive(data) {
         headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'text/plain; charset=UTF-8' },
         body: tekst
     });
+    console.log('lagra på google');
     if (!response.ok)
         throw new Error(await response.text());
 }

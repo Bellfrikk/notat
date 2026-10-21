@@ -7,7 +7,8 @@ export function lagreNotat(): void {
 }
 
 function lagreLokalt(data:HovedNotat) {
-    localStorage.setItem('notato', JSON.stringify(data));
+    localStorage.setItem('notat', JSON.stringify(data));
+    console.log('lagra lokalt');
 }
 
 async function lagreTilGoogleDrive( data: HovedNotat ): Promise<void> {
@@ -22,6 +23,7 @@ async function lagreTilGoogleDrive( data: HovedNotat ): Promise<void> {
       body: tekst
     }
   );
+  console.log('lagra på google');
   if (!response.ok) throw new Error(await response.text());
 }
 
