@@ -6,17 +6,15 @@ export function nyId():string {
   return crypto.randomUUID();
 }
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-            .catch(feil => {
-                console.error('Service worker-feil:', feil);
-            });
-    });
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .catch(feil => {
+        console.error('Service worker-feil:', feil);
+      });
+  });
 }
 
-document.addEventListener('DOMContentLoaded', ()=> {
-  
-  start();
+document.addEventListener('DOMContentLoaded', ()=> { start();
 });
 
 export const hovedNotatBoks = document.createElement('div');

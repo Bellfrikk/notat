@@ -13,19 +13,15 @@ function slåSamanUnderNotat(google, lokalt) {
         const lokaltNotat = lokalt[id];
         if (googleNotat) {
             //endre fra boolen til teks pga kompabilitet
-            if (googleNotat.sletta === true)
-                googleNotat.sletta = 'søppel';
-            else if (googleNotat.sletta === false)
-                googleNotat.sletta = 'ok';
+            //  if( googleNotat.sletta === true) googleNotat.sletta = 'søppel';
+            // else if(googleNotat.sletta === false) googleNotat.sletta = 'ok';
             // vil ikkje ha notat som er evig sletta
             if (googleNotat.sletta === 'evigSletta')
                 continue;
         }
         if (lokaltNotat) {
-            if (lokaltNotat.sletta === true)
-                lokaltNotat.sletta = 'søppel';
-            else if (lokaltNotat && lokaltNotat.sletta === false)
-                lokaltNotat.sletta = 'ok';
+            //  if(lokaltNotat.sletta === true) lokaltNotat.sletta = 'søppel';
+            //  else if(lokaltNotat && lokaltNotat.sletta === false) lokaltNotat.sletta = 'ok';
             // vil ikkje ha notat som er evig sletta
             if (lokaltNotat.sletta === 'evigSletta')
                 continue;
