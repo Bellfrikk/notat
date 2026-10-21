@@ -13,7 +13,7 @@ import { lagTomtNotat } from './lagTomtNotat.js';
   document.body.appendChild(toppLinje);
 
   const logo = document.createElement('img');
-  logo.src = 'ikon-512.png';
+  logo.src = './ikon/ikon-512.png';
   logo.className = 'ikon';
   toppLinje.appendChild(logo);
 

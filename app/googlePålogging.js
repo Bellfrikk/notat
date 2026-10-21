@@ -6,19 +6,31 @@ export let accessToken = null;
 export let filId = null;
 let tokenClient;
 export function startGoogle() {
+    console.log('Startar Google-innlogging');
     tokenClient = google.accounts.oauth2.initTokenClient({
         client_id: CLIENT_ID,
         scope: SCOPES,
         callback: async (response) => {
-            if (response.error) {
-                console.error(response);
+            console.log('Google callback:', response);
+            if (response.error || !response.access_token) {
+                console.error('Google OAuth-feil:', response);
+                påLogga(false);
                 return;
             }
             accessToken = response.access_token;
-            await finnNotatFil();
+            try {
+                await finnNotatFil();
+                console.log('Google Drive tilkopla');
+            }
+            catch (feil) {
+                console.error('Feil ved Google Drive:', feil);
+                påLogga(false);
+            }
+        },
+        error_callback: (feil) => {
+            console.error('Google popup-feil:', feil);
         }
     });
-    //if (!tokenClient) startGoogle();
     tokenClient.requestAccessToken();
 }
 async function finnNotatFil() {
