@@ -5,6 +5,7 @@ import { lagreNotat } from './lagreNotat.js';
 import { tegnNotat } from './tegnNotat.js';
 import { søkNotat, nesteTreff } from './søk.js';
 import { lagTomtNotat } from './lagTomtNotat.js';
+import { startImport } from './import.js';
 export function lagTopplinje() {
     const toppLinje = document.createElement('div');
     toppLinje.className = 'toppLinje';
@@ -12,6 +13,10 @@ export function lagTopplinje() {
     const logo = document.createElement('img');
     logo.src = './ikon/ikon-512.png';
     logo.className = 'ikon';
+    logo.addEventListener('click', (event) => {
+        event.stopPropagation();
+        startImport();
+    });
     toppLinje.appendChild(logo);
     const googleKnapp = document.createElement('button');
     googleKnapp.id = 'googleKnapp';
