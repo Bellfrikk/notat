@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'notat-v6';
+const CACHE_NAME = 'notat-v7';
 
 const FILER = [
     './',

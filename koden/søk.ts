@@ -4,7 +4,7 @@ let søketreff: HTMLElement[] = [];
 let søkeindeks = -1;
 
 export function søkNotat(hovedNotat: HovedNotat, søkjeord: string): void {
-
+ console.log('søk2')
   søketreff = [];
   søkeindeks = -1;
 
@@ -13,39 +13,40 @@ export function søkNotat(hovedNotat: HovedNotat, søkjeord: string): void {
   if (!søk) {
     tegnVanligeNotat();
   return;}
+  
+function gåGjennom(notatliste: Record<string, Notat>): void {
+  for (const data of Object.values(notatliste)) {
+    if (data.sletta !== 'ok') continue;
 
-  function gåGjennom(notatliste: Record<string, Notat>): void {
+    const notatElement = document.getElementById(data.id);
 
-    for (const data of Object.values(notatliste)) {
-
-      if (data.sletta) continue;
-
-      const notatElement = document.getElementById(data.id);
-      if (!notatElement) continue;
-
+    if (notatElement) {
       notatElement.classList.remove('notatOpent');
       notatElement.classList.add('notatLukka');
 
-      const boks = notatElement.closest('.notatBoks') as HTMLElement;
-      const tittel = boks.querySelector('.tittel') as HTMLElement;
-      const tekst = boks.querySelector('.tekst') as HTMLElement;
+      const boks = notatElement.closest('.notatBoks') as HTMLElement | null;
+      const tittel = boks?.querySelector('.tittel') as HTMLElement | null;
+      const tekst = boks?.querySelector('.tekst') as HTMLElement | null;
 
       const treffITittel = data.tittel.toLowerCase().includes(søk.toLowerCase());
       const treffITekst = data.tekst.toLowerCase().includes(søk.toLowerCase());
 
       if (treffITittel || treffITekst) {
-        søketreff.push(treffITittel ? tittel : tekst);
+        const treff = treffITittel ? tittel : tekst;
+        if (treff) søketreff.push(treff);
       }
-
-      // Opne notatet dersom det har treff eller treff under seg
+if (treffITittel || treffITekst) {
+  console.log('TREFF:', data.tittel);
+}
       if (treffITittel || treffITekst || harTreffUnder(data, søk)) {
         opneForeldre(notatElement);
       }
-
-      gåGjennom(data.underNotat);
     }
-  }
 
+    // Søk alltid vidare i undernotata
+    gåGjennom(data.underNotat);
+  }
+}
   gåGjennom(hovedNotat.underNotat);
 
   if (søketreff.length > 0) {
@@ -78,7 +79,7 @@ function harTreffUnder(data: Notat, søk: string): boolean {
 
   for (const barn of Object.values(data.underNotat)) {
 
-    if (barn.sletta) continue;
+    if (barn.sletta !== 'ok') continue;
 
     if (
       barn.tittel.toLowerCase().includes(søk.toLowerCase()) ||

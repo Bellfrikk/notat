@@ -16,10 +16,6 @@ import { startImport } from './import.js';
   const logo = document.createElement('img');
   logo.src = './ikon/ikon-512.png';
   logo.className = 'ikon';
-  logo.addEventListener('click', (event) => {
-    event.stopPropagation();
-    startImport ();
-  });
   toppLinje.appendChild(logo);
 
   const googleKnapp = document.createElement('button');
@@ -78,8 +74,10 @@ import { startImport } from './import.js';
   søkefelt.id = 'søkefelt';
   søkefelt.type = 'search';
   søkefelt.placeholder = 'Søk';
-  søkefelt.addEventListener('input', () => { søkNotat(hovedNotat, søkefelt.value); });
-  toppLinje.appendChild(søkefelt);
+søkefelt.addEventListener('input', () => {
+  console.log('Søkefelt endra:', søkefelt.value);
+  søkNotat(hovedNotat, søkefelt.value);
+});  toppLinje.appendChild(søkefelt);
 
   const nesteTreffKnapp = document.createElement('button');
   nesteTreffKnapp.id = 'nesteTreff';
