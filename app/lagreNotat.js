@@ -7,7 +7,7 @@ export function lagreNotat() {
 }
 function lagreLokalt(data) {
     localStorage.setItem('notat', JSON.stringify(data));
-    console.log(JSON.stringify(data));
+    console.log('lagra');
 }
 async function lagreTilGoogleDrive(data) {
     if (!accessToken || !filId)

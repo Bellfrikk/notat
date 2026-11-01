@@ -9,7 +9,7 @@ export function lagreNotat(): void {
 function lagreLokalt(data:HovedNotat) {
   
     localStorage.setItem('notat', JSON.stringify(data));
-  console.log(JSON.stringify(data))
+  console.log('lagra')
 }
 
 async function lagreTilGoogleDrive( data: HovedNotat ): Promise<void> {
