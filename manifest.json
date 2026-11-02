@@ -13,10 +13,10 @@
   "theme_color": "#000000",
   "icons": [
     {
-  "src": "ikon/ikon-512.png",
-  "sizes": "512x512",
-  "type": "image/png",
-  "purpose": "maskable"
+      "src": "ikon/ikon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "ikon/ikon-192.png",
