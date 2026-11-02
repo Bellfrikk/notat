@@ -116,14 +116,13 @@ export function tegnNotat(overNotat, forelderData, denneData, type) {
             tegnNotat(underNotatBoks, denneData, denneData.underNotat[id], (type === 'vanlig') ? 'vanlig' : 'underSøppel'); //alle undernotat av søppel skal være undersøppel
         });
     }
-    //notat tekst
+    // notat tekst
     const tekst = document.createElement('div');
     tekst.className = 'tekst';
-    tekst.textContent = denneData.tekst;
     tekst.contentEditable = 'true';
+    tekst.innerText = denneData.tekst || '';
     tekst.addEventListener('input', () => {
-        var _a;
-        denneData.tekst = (_a = tekst.textContent) !== null && _a !== void 0 ? _a : '';
+        denneData.tekst = tekst.innerText;
         denneData.sistEndra = Date.now();
         lagreNotat();
     });

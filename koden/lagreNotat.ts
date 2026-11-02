@@ -1,6 +1,7 @@
 import { hovedNotat } from "./henteNotat.js";
 import { filId, accessToken } from "./googlePålogging.js";
 import { sorterAlfabetisk } from  "./sortereAlfabetisk.js";
+
 export function lagreNotat(): void {
   lagreLokalt(hovedNotat);
   lagreTilGoogleDrive(hovedNotat);

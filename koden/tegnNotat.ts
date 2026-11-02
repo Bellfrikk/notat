@@ -3,6 +3,7 @@ import { nyId } from "./hoved.js";
 import { endreFarge, nyFarge } from "./farge.js";
 import { slettNotat, uSlettNotat, evigSlettNotat } from "./slett.js";
 import { lagTomtNotat } from "./lagTomtNotat.js";
+import { sorterAlfabetisk } from "./sortereAlfabetisk.js";
 
 export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat, denneData:Notat, type:'vanlig'|'hovedSøppel'|'underSøppel') {
 
@@ -130,17 +131,21 @@ if(type === 'vanlig'){
           });
       }
     
-    //notat tekst
+
+    // notat tekst
     const tekst = document.createElement('div');
     tekst.className = 'tekst';
-    tekst.textContent = denneData.tekst;
     tekst.contentEditable = 'true';
+    tekst.innerText = denneData.tekst || '';
+
     tekst.addEventListener('input', () => {
-      denneData.tekst = tekst.textContent ?? '';
+      denneData.tekst = tekst.innerText;
       denneData.sistEndra = Date.now();
       lagreNotat();
-    }); 
+    });
+
     notat.appendChild(tekst);
+
 
   notatBoks.appendChild(notat);  
 overNotat.appendChild(notatBoks);
