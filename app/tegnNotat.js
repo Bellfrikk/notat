@@ -3,23 +3,25 @@ import { nyId } from "./hoved.js";
 import { endreFarge } from "./farge.js";
 import { slettNotat, uSlettNotat, evigSlettNotat } from "./slett.js";
 import { lagTomtNotat } from "./lagTomtNotat.js";
+import { fokuser } from "./søk.js";
 export function tegnNotat(overNotat, forelderData, denneData, type) {
     const notatBoks = document.createElement('div');
+    notatBoks.id = denneData.id;
     notatBoks.className = 'notatBoks';
     notatBoks.style.backgroundColor = denneData.farge;
     //tittelboks
     const tittelBoks = document.createElement('div');
     tittelBoks.className = 'tittelBoks';
-    tittelBoks.addEventListener('click', opneNotat);
+    tittelBoks.addEventListener('click', () => opneNotat(notat));
     notatBoks.appendChild(tittelBoks);
-    function opneNotat() {
+    function opneNotat(notatBoks) {
         tittelBoks.querySelectorAll('.notatLukka').forEach((knapp) => {
             knapp.classList.remove('notatLukka');
             knapp.classList.add('notatOpent');
         });
-        notat.classList.remove('notatLukka');
-        notat.classList.add('notatOpent');
-        tittelBoks.removeEventListener('click', opneNotat);
+        notatBoks.classList.remove('notatLukka');
+        notatBoks.classList.add('notatOpent');
+        tittelBoks.removeEventListener('click', () => opneNotat(notat));
         tittel.contentEditable = 'true';
         tittel.focus();
     }
@@ -31,7 +33,7 @@ export function tegnNotat(overNotat, forelderData, denneData, type) {
         var _a;
         event.stopPropagation();
         tittel.contentEditable = 'false';
-        //lagra tittel
+        //lagre tittel
         const nyTittel = (_a = tittel.textContent) !== null && _a !== void 0 ? _a : '';
         lagreTittel(forelderData, denneData, nyTittel);
         //skjul notat
@@ -39,7 +41,7 @@ export function tegnNotat(overNotat, forelderData, denneData, type) {
             ting.classList.remove('notatOpent');
             ting.classList.add('notatLukka');
         });
-        tittelBoks.addEventListener('click', opneNotat);
+        tittelBoks.addEventListener('click', () => opneNotat(notat));
     });
     tittelBoks.appendChild(tilbakeKnapp);
     // tittel
@@ -100,6 +102,11 @@ export function tegnNotat(overNotat, forelderData, denneData, type) {
             denneData.underNotat[id] = lagTomtNotat(id, denneData.farge);
             lagreNotat();
             tegnNotat(underNotatBoks, denneData, denneData.underNotat[id], 'vanlig');
+            const notatBoks = document.getElementById(id);
+            if (!notatBoks)
+                return;
+            opneNotat(notatBoks);
+            fokuser(notatBoks);
         });
         tittelBoks.appendChild(nyKnapp);
     }

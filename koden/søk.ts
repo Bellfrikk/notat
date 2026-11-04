@@ -97,9 +97,14 @@ function fokuserSøketreff(): void {
 
   const treff = søketreff[søkeindeks];
   const notatBoks = treff.closest('.notatBoks') as HTMLElement | null;
-  const hovedBoks = document.getElementById('hovedNotatBoks');
+   if (!notatBoks ) return;
+  fokuser( notatBoks)
+}
 
-  if (!notatBoks || !hovedBoks) return;
+
+export function fokuser( notatBoks:HTMLElement){ 
+  const hovedBoks = document.getElementById('hovedNotatBoks');
+  if (!hovedBoks ) return;
 
   const topp =
     hovedBoks.scrollTop +

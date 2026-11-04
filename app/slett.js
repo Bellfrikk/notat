@@ -1,10 +1,10 @@
-import { tegnSøppelNotat } from "./hoved.js";
+import { tegnSøppelNotat, tegnVanligeNotat } from "./hoved.js";
 import { lagreNotat } from "./lagreNotat.js";
 export function slettNotat(denneData, notatBoks) {
     notatBoks.remove();
     denneData.sletta = 'søppel';
     lagreNotat();
-    //tegnVanligeNotat();
+    tegnVanligeNotat();
 }
 export function uSlettNotat(denneData, notatBoks) {
     denneData.sletta = 'ok';

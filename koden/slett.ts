@@ -5,7 +5,7 @@ export function slettNotat(denneData:Notat, notatBoks:HTMLElement) {
   notatBoks.remove();
   denneData.sletta = 'søppel';
   lagreNotat();
-  //tegnVanligeNotat();
+  tegnVanligeNotat();
 }
 export function uSlettNotat(denneData:Notat, notatBoks:HTMLElement) {
   denneData.sletta = 'ok';

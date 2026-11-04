@@ -75,8 +75,13 @@ function fokuserSøketreff() {
         return;
     const treff = søketreff[søkeindeks];
     const notatBoks = treff.closest('.notatBoks');
+    if (!notatBoks)
+        return;
+    fokuser(notatBoks);
+}
+export function fokuser(notatBoks) {
     const hovedBoks = document.getElementById('hovedNotatBoks');
-    if (!notatBoks || !hovedBoks)
+    if (!hovedBoks)
         return;
     const topp = hovedBoks.scrollTop +
         notatBoks.getBoundingClientRect().top -
