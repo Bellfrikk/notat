@@ -1,4 +1,4 @@
-import { tegnVanligeNotat } from "./hoved.js";
+import { tegnAlleNotat } from "./hoved.js";
 
 let søketreff: HTMLElement[] = [];
 let søkeindeks = -1;
@@ -11,7 +11,7 @@ export function søkNotat(hovedNotat: HovedNotat, søkjeord: string): void {
   const søk = søkjeord.trim();
 
   if (!søk) {
-    tegnVanligeNotat();
+    tegnAlleNotat();
   return;}
   
 function gåGjennom(notatliste: Record<string, Notat>): void {

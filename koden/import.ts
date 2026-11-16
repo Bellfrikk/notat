@@ -1,4 +1,4 @@
-import { nyId, tegnVanligeNotat } from './hoved.js';
+import { nyId, tegnAlleNotat } from './hoved.js';
 import { nyFarge } from './farge.js';
 interface Window {
     showDirectoryPicker(): Promise<FileSystemDirectoryHandle>;
@@ -154,7 +154,7 @@ export async function startImport() {
     );
 
     lagreNotat();
-    tegnVanligeNotat();
+    tegnAlleNotat();
   } catch (feil) {
     if ((feil as DOMException).name !== "AbortError") {
       console.error("Importen feila:", feil);

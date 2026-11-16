@@ -1,15 +1,15 @@
-import { tegnSøppelNotat, tegnVanligeNotat } from "./hoved.js";
+import { tegnAlleNotat } from "./hoved.js";
 import { lagreNotat } from "./lagreNotat.js";
 export function slettNotat(denneData, notatBoks) {
     notatBoks.remove();
     denneData.sletta = 'søppel';
     lagreNotat();
-    tegnVanligeNotat();
+    tegnAlleNotat();
 }
 export function uSlettNotat(denneData, notatBoks) {
     denneData.sletta = 'ok';
     lagreNotat();
-    tegnSøppelNotat();
+    tegnAlleNotat();
 }
 export function evigSlettNotat(denneData, notatBoks) {
     let bekreft = window.confirm('Sikker du vil sletta den for allltid??');
@@ -17,5 +17,5 @@ export function evigSlettNotat(denneData, notatBoks) {
         return;
     denneData.sletta = 'evigSletta';
     lagreNotat();
-    tegnSøppelNotat();
+    tegnAlleNotat();
 }

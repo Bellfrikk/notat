@@ -1,6 +1,6 @@
 import { filId, accessToken } from "./googlePålogging.js";
 import { slåSamanNotat } from "./slåSamanNotat.js";
-import { tegnVanligeNotat } from "./hoved.js";
+import { tegnAlleNotat } from "./hoved.js";
 export let hovedNotat = { underNotat: {} };
 export async function hentNotat() {
     let googleNotat = await hentNotatFraGoogle();
@@ -9,7 +9,7 @@ export async function hentNotat() {
     console.log('lokaltNotat', lokaltNotat);
     let notat = slåSamanNotat(googleNotat, lokaltNotat);
     hovedNotat = notat;
-    tegnVanligeNotat();
+    tegnAlleNotat();
 }
 export function tomtNotat() {
     return { underNotat: {} };

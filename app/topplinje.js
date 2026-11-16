@@ -1,6 +1,6 @@
 import { startGoogle } from './googlePålogging.js';
 import { hovedNotat } from './henteNotat.js';
-import { nyId, hovedNotatBoks, tegnSøppelNotat, tegnVanligeNotat } from './hoved.js';
+import { nyId, hovedNotatBoks } from './hoved.js';
 import { lagreNotat } from './lagreNotat.js';
 import { tegnNotat } from './tegnNotat.js';
 import { søkNotat, nesteTreff } from './søk.js';
@@ -28,27 +28,16 @@ export function lagTopplinje() {
     søppelKnapp.className = 'knapp';
     søppelKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
-        notatKnapp.style.display = '';
-        søppelKnapp.style.display = 'none';
-        søkefelt.style.display = 'none';
-        nesteTreffKnapp.style.display = 'none';
-        tegnSøppelNotat();
+        if (søppelKnapp.style.background === 'green') {
+            søppelKnapp.style.background = 'red';
+            document.documentElement.style.setProperty('--erSletta', 'none');
+        }
+        else {
+            søppelKnapp.style.background = 'green';
+            document.documentElement.style.setProperty('--erSletta', 'block');
+        }
     });
     toppLinje.appendChild(søppelKnapp);
-    // visnotat knapp
-    const notatKnapp = document.createElement('button');
-    notatKnapp.style.backgroundImage = 'url(./ikon/notat.png)';
-    notatKnapp.className = 'knapp';
-    notatKnapp.style.display = 'none';
-    notatKnapp.addEventListener('click', (event) => {
-        event.stopPropagation();
-        søppelKnapp.style.display = '';
-        søkefelt.style.display = '';
-        nesteTreffKnapp.style.display = '';
-        notatKnapp.style.display = 'none';
-        tegnVanligeNotat();
-    });
-    toppLinje.appendChild(notatKnapp);
     // + knapp
     const nyKnapp = document.createElement('button');
     nyKnapp.style.backgroundImage = 'url(./ikon/nyttnotat.png)';
@@ -58,7 +47,7 @@ export function lagTopplinje() {
         const id = nyId();
         hovedNotat.underNotat[id] = lagTomtNotat(id, '#ffffff');
         lagreNotat();
-        tegnNotat(hovedNotatBoks, hovedNotat, hovedNotat.underNotat[id], 'vanlig');
+        tegnNotat(hovedNotatBoks, hovedNotat, hovedNotat.underNotat[id]);
     });
     toppLinje.appendChild(nyKnapp);
     //søkfelt

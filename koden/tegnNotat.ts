@@ -6,12 +6,15 @@ import { lagTomtNotat } from "./lagTomtNotat.js";
 import { hovedNotat } from "./henteNotat.js";
 import { fokuser } from "./søk.js";
 
-export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat, denneData:Notat, type:'vanlig'|'hovedSøppel'|'underSøppel') {
+export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat, denneData:Notat) {
+  if(denneData.sletta === 'evigSletta') return; //ikkje tegn notat som er evig sletta
+
+  const erSletta = denneData.sletta === 'søppel';
 
   const notatBoks = document.createElement('div');
   notatBoks.id = denneData.id;
-  notatBoks.className = 'notatBoks';
-  notatBoks.style.backgroundColor = denneData.farge;
+  notatBoks.className = erSletta ? 'notatBoks erSletta' : 'notatBoks';
+  notatBoks.style.backgroundColor = denneData.sletta === 'ok' ? denneData.farge: '#666666';
 
     //tittelboks
     const tittelBoks = document.createElement('div');
@@ -61,7 +64,7 @@ export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat,
       });  
       tittelBoks.appendChild(tittel);
 
-if(type === 'vanlig'){
+if(!erSletta){
       // Slettknapp
       const slettKnapp = document.createElement('button');
       slettKnapp.style.backgroundImage = 'url(./ikon/slett.png)';
@@ -72,7 +75,7 @@ if(type === 'vanlig'){
       });
       tittelBoks.appendChild(slettKnapp);
 }
-if(type === 'hovedSøppel'){
+if(erSletta){
       // permanent slett knapp, skal bare vise i søppel
       const evigSlettKnapp = document.createElement('button');
       evigSlettKnapp.style.backgroundImage = 'url(./ikon/evigslett.png)';
@@ -93,7 +96,7 @@ if(type === 'hovedSøppel'){
       });
       tittelBoks.appendChild(uSlettKnapp);
 }
-if(type === 'vanlig'){
+if(!erSletta){
       // Fargeknapp
       const fargeKnapp = document.createElement('button');
       fargeKnapp.style.backgroundImage = 'url(./ikon/farge.png)';
@@ -110,7 +113,7 @@ if(type === 'vanlig'){
         const id:string = nyId();
         denneData.underNotat[id] = lagTomtNotat( id , denneData.farge);
         lagreNotat();
-        tegnNotat(underNotatBoks,denneData, denneData.underNotat[id], 'vanlig');
+        tegnNotat(underNotatBoks,denneData, denneData.underNotat[id]);
         const notatBoks = document.getElementById(id);
         if (!notatBoks ) return;
         opneNotat(notatBoks);
@@ -132,8 +135,7 @@ if(type === 'vanlig'){
           tegnNotat(
             underNotatBoks, 
             denneData, 
-            denneData.underNotat[id], 
-            (type === 'vanlig') ? 'vanlig' : 'underSøppel'); //alle undernotat av søppel skal være undersøppel
+            denneData.underNotat[id]);
           });
       }
     

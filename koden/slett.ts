@@ -1,16 +1,16 @@
-import { tegnSøppelNotat, tegnVanligeNotat } from "./hoved.js";
+import { tegnAlleNotat } from "./hoved.js";
 import { lagreNotat } from "./lagreNotat.js";
 
 export function slettNotat(denneData:Notat, notatBoks:HTMLElement) {
   notatBoks.remove();
   denneData.sletta = 'søppel';
   lagreNotat();
-  tegnVanligeNotat();
+  tegnAlleNotat();
 }
 export function uSlettNotat(denneData:Notat, notatBoks:HTMLElement) {
   denneData.sletta = 'ok';
   lagreNotat();
-  tegnSøppelNotat();
+  tegnAlleNotat();
 }
 
 export function evigSlettNotat(denneData:Notat, notatBoks:HTMLElement) {
@@ -18,5 +18,5 @@ export function evigSlettNotat(denneData:Notat, notatBoks:HTMLElement) {
   if(!bekreft) return;
   denneData.sletta = 'evigSletta';
   lagreNotat();
-  tegnSøppelNotat();
+  tegnAlleNotat();
 }

@@ -1,4 +1,4 @@
-import { tegnVanligeNotat } from "./hoved.js";
+import { tegnAlleNotat } from "./hoved.js";
 let søketreff = [];
 let søkeindeks = -1;
 export function søkNotat(hovedNotat, søkjeord) {
@@ -7,7 +7,7 @@ export function søkNotat(hovedNotat, søkjeord) {
     søkeindeks = -1;
     const søk = søkjeord.trim();
     if (!søk) {
-        tegnVanligeNotat();
+        tegnAlleNotat();
         return;
     }
     function gåGjennom(notatliste) {

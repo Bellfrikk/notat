@@ -1,4 +1,4 @@
-import { nyId, tegnVanligeNotat } from './hoved.js';
+import { nyId, tegnAlleNotat } from './hoved.js';
 import { nyFarge } from './farge.js';
 import { hovedNotat } from './henteNotat.js';
 import { lagreNotat } from './lagreNotat.js';
@@ -90,7 +90,7 @@ export async function startImport() {
         const mappe = await window.showDirectoryPicker();
         await importerMappe(mappe, hovedNotat, "#ffffff");
         lagreNotat();
-        tegnVanligeNotat();
+        tegnAlleNotat();
     }
     catch (feil) {
         if (feil.name !== "AbortError") {
