@@ -104,9 +104,7 @@ h1{
 }
 
 
-.erSletta{
-  display:var(--erSletta, none);
-}
+
 
 .notatLukka{
   display: none;
@@ -138,4 +136,8 @@ h1{
   line-height: 1.1;
 
   overflow-wrap: break-word;
+}
+.erSletta{
+  display:var(--erSletta, none);
+  background-color: #777;
 }

@@ -14,7 +14,6 @@ export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat,
   const notatBoks = document.createElement('div');
   notatBoks.id = denneData.id;
   notatBoks.className = erSletta ? 'notatBoks erSletta' : 'notatBoks';
-  notatBoks.style.backgroundColor = denneData.sletta === 'ok' ? denneData.farge: '#666666';
 
     //tittelboks
     const tittelBoks = document.createElement('div');
@@ -79,7 +78,7 @@ if(erSletta){
       // permanent slett knapp, skal bare vise i søppel
       const evigSlettKnapp = document.createElement('button');
       evigSlettKnapp.style.backgroundImage = 'url(./ikon/evigslett.png)';
-      evigSlettKnapp.className = 'knapp notatLukka';
+      evigSlettKnapp.className = 'knapp notatLukka erSletta';
       evigSlettKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         evigSlettNotat(denneData, notatBoks);

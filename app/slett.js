@@ -3,13 +3,13 @@ import { lagreNotat } from "./lagreNotat.js";
 export function slettNotat(denneData, notatBoks) {
     notatBoks.remove();
     denneData.sletta = 'søppel';
+    notatBoks.classList.add('erSletta');
     lagreNotat();
-    tegnAlleNotat();
 }
 export function uSlettNotat(denneData, notatBoks) {
     denneData.sletta = 'ok';
     lagreNotat();
-    tegnAlleNotat();
+    notatBoks.classList.remove('erSletta');
 }
 export function evigSlettNotat(denneData, notatBoks) {
     let bekreft = window.confirm('Sikker du vil sletta den for allltid??');
