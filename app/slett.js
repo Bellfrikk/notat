@@ -1,21 +1,22 @@
-import { tegnAlleNotat } from "./hoved.js";
 import { lagreNotat } from "./lagreNotat.js";
 export function slettNotat(denneData, notatBoks) {
-    notatBoks.remove();
     denneData.sletta = 'søppel';
-    notatBoks.classList.add('erSletta');
+    denneData.sistEndra = Date.now();
+    notatBoks.classList.add('slettaNotat');
+    notatBoks.classList.remove('vanligNotat');
     lagreNotat();
 }
 export function uSlettNotat(denneData, notatBoks) {
     denneData.sletta = 'ok';
+    notatBoks.classList.remove('slettaNotat');
+    notatBoks.classList.add('vanligNotat');
     lagreNotat();
-    notatBoks.classList.remove('erSletta');
 }
 export function evigSlettNotat(denneData, notatBoks) {
-    let bekreft = window.confirm('Sikker du vil sletta den for allltid??');
+    let bekreft = window.confirm('Sikker du vil sletta den for alltid??');
     if (!bekreft)
         return;
     denneData.sletta = 'evigSletta';
+    notatBoks.remove();
     lagreNotat();
-    tegnAlleNotat();
 }

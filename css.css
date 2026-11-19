@@ -68,15 +68,19 @@ h1{
   margin: 5px;
 }
 
-.notatBoks {
+.vanligNotat {
   width: 100%;
   margin: 4px 0;
   border-radius: 12px;
   border: 1px solid rgba(0, 0, 0, 0.15);
 }
-
-
-/* Tittellinje */
+.slettaNotat{
+  width: 100%;
+  margin: 4px 0;
+  border-radius: 12px;
+  opacity: 0.5;
+  border: 2px solid red;
+}
 
 .tittelBoks {
   width: 100%;
@@ -85,9 +89,6 @@ h1{
   display: flex;
   align-items: center;
 }
-
-
-/* Tittel */
 
 .tittel {
   flex: 1;
@@ -103,41 +104,31 @@ h1{
   overflow-wrap: anywhere;
 }
 
-
-
-
-.notatLukka{
-  display: none;
-}
-.notatOpent{
-  display: '';
-}
-/* Innhaldet i notatet */
-
 .notat {
   width: calc(100% - 2px);
-
+  display: none;
   margin-left: 0.5px;
   margin-top: 2px;
   padding: 0px;
 }
 
-
-/* Tekst */
-
 .tekst {
   width: 100%;
   min-height: 45px;
-
   padding: 10px;
-
   outline: none;
-
   line-height: 1.1;
-
   overflow-wrap: break-word;
 }
-.erSletta{
-  display:var(--erSletta, none);
-  background-color: #777;
-}
+
+.slettaNotat { display: none;}
+.visSøppel .slettaNotat { display: block; }
+.vanligKnapp, .søppelKnapp { display: none;}
+.visNotat.vanligNotat > .tittelBoks > .vanligKnapp { display: block;}
+.visNotat.vanligNotat > .tittelBoks > .søppelKnapp { display: none;}
+.visNotat.vanligNotat > .notat { display: block;}
+
+.visNotat.slettaNotat > .tittelBoks > .vanligKnapp { display: none;}
+.visNotat.slettaNotat > .tittelBoks > .søppelKnapp { display: block;}
+.visNotat.slettaNotat > .notat { display: block;}
+

@@ -1,12 +1,11 @@
  import { startGoogle } from './googlePålogging.js';
  import { hovedNotat } from './henteNotat.js';
- import { nyId, hovedNotatBoks, tegnAlleNotat } from './hoved.js';
+ import { nyId, hovedNotatBoks } from './hoved.js';
  import { lagreNotat } from './lagreNotat.js';
  import { tegnNotat } from './tegnNotat.js';
- import { nyFarge } from './farge.js';
+ import { opneLukkNotat } from './opneLukkNotat.js';
  import { søkNotat, nesteTreff } from './søk.js';
-import { lagTomtNotat } from './lagTomtNotat.js';
-import { startImport } from './import.js';
+ import { lagTomtNotat } from './lagTomtNotat.js';
 
  export function lagTopplinje() {
  const toppLinje = document.createElement('div');
@@ -34,13 +33,9 @@ import { startImport } from './import.js';
   søppelKnapp.className = 'knapp';
   søppelKnapp.addEventListener('click', (event) => {
     event.stopPropagation();
-    if(søppelKnapp.style.background === 'green') {
-      søppelKnapp.style.background = 'red';
-      document.documentElement.style.setProperty('--erSletta', 'none');
-    } else {
-      søppelKnapp.style.background = 'green';
-      document.documentElement.style.setProperty('--erSletta', 'block');
-    }
+    document.body.classList.toggle('visSøppel');
+   // søppelKnapp.style.backgroundImage = søppelViser ? 'url(./ikon/notat.png)' : 'url(./ikon/slett.png)';
+
   });
   toppLinje.appendChild(søppelKnapp);
 
@@ -55,6 +50,9 @@ import { startImport } from './import.js';
     hovedNotat.underNotat[id] = lagTomtNotat( id , '#ffffff');
     lagreNotat();
     tegnNotat(hovedNotatBoks,hovedNotat, hovedNotat.underNotat[id]);
+    const denneNotatBoks = document.getElementById(id);
+    if(!denneNotatBoks)return;
+    opneLukkNotat(id)
   });
   toppLinje.appendChild(nyKnapp);
 //søkfelt

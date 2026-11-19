@@ -3,53 +3,32 @@ import { nyId } from "./hoved.js";
 import { endreFarge, nyFarge } from "./farge.js";
 import { slettNotat, uSlettNotat, evigSlettNotat } from "./slett.js";
 import { lagTomtNotat } from "./lagTomtNotat.js";
-import { hovedNotat } from "./henteNotat.js";
+import { opneLukkNotat } from "./opneLukkNotat.js";
 import { fokuser } from "./søk.js";
 
 export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat, denneData:Notat) {
   if(denneData.sletta === 'evigSletta') return; //ikkje tegn notat som er evig sletta
 
-  const erSletta = denneData.sletta === 'søppel';
-
   const notatBoks = document.createElement('div');
   notatBoks.id = denneData.id;
-  notatBoks.className = erSletta ? 'notatBoks erSletta' : 'notatBoks';
+  notatBoks.className = (denneData.sletta === 'søppel') ? 'slettaNotat' : 'vanligNotat';
+  notatBoks.style.backgroundColor = denneData.farge;
 
     //tittelboks
     const tittelBoks = document.createElement('div');
     tittelBoks.className = 'tittelBoks';
-    tittelBoks.addEventListener('click', () => opneNotat(notat));
-    notatBoks.appendChild(tittelBoks);
-
-    function opneNotat(notatBoks:HTMLElement) {
-      tittelBoks.querySelectorAll<HTMLElement>('.notatLukka').forEach((knapp) => {
-        knapp.classList.remove('notatLukka');
-        knapp.classList.add('notatOpent');
-      });
-        notatBoks.classList.remove('notatLukka');
-        notatBoks.classList.add('notatOpent');
-    
-      tittelBoks.removeEventListener('click',() => opneNotat(notat));
-      tittel.contentEditable = 'true';
-      tittel.focus();
-    }
+    tittelBoks.addEventListener('click', () => {
+      if (tittel.contentEditable === 'true') return;
+      opneLukkNotat(denneData.id);
+    });    notatBoks.appendChild(tittelBoks);
 
       // Tilbakeknapp
       const tilbakeKnapp = document.createElement('button');
       tilbakeKnapp.style.backgroundImage = 'url(./ikon/tilbakepil.png)';
-      tilbakeKnapp.className = 'knapp notatLukka';
+      tilbakeKnapp.className = 'knapp vanligKnapp søppelKnapp';
       tilbakeKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
-        tittel.contentEditable = 'false';
-        //lagre tittel
-        const nyTittel = tittel.textContent ?? '';
-        lagreTittel(forelderData, denneData, nyTittel);
-        //skjul notat
-        notatBoks.querySelectorAll<HTMLElement>('.notatOpent').forEach((ting) => { 
-          ting.classList.remove('notatOpent');
-          ting.classList.add('notatLukka');
-        });
-      tittelBoks.addEventListener('click', () => opneNotat(notat));
+        opneLukkNotat(denneData.id);
       });
       tittelBoks.appendChild(tilbakeKnapp);
 
@@ -63,22 +42,22 @@ export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat,
       });  
       tittelBoks.appendChild(tittel);
 
-if(!erSletta){
+
       // Slettknapp
       const slettKnapp = document.createElement('button');
       slettKnapp.style.backgroundImage = 'url(./ikon/slett.png)';
-      slettKnapp.className = 'knapp notatLukka';
+      slettKnapp.className = 'knapp vanligKnapp';
       slettKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         slettNotat(denneData, notatBoks);
       });
       tittelBoks.appendChild(slettKnapp);
-}
-if(erSletta){
+
+
       // permanent slett knapp, skal bare vise i søppel
       const evigSlettKnapp = document.createElement('button');
       evigSlettKnapp.style.backgroundImage = 'url(./ikon/evigslett.png)';
-      evigSlettKnapp.className = 'knapp notatLukka erSletta';
+      evigSlettKnapp.className = 'knapp søppelKnapp';
       evigSlettKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         evigSlettNotat(denneData, notatBoks);
@@ -88,42 +67,40 @@ if(erSletta){
       // U slett knapp, skal bare vise i søppel
       const uSlettKnapp = document.createElement('button');
       uSlettKnapp.style.backgroundImage = 'url(./ikon/uslett.png)';
-      uSlettKnapp.className = 'knapp notatLukka';
+      uSlettKnapp.className = 'knapp søppelKnapp';
       uSlettKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         uSlettNotat(denneData, notatBoks);
       });
       tittelBoks.appendChild(uSlettKnapp);
-}
-if(!erSletta){
+
       // Fargeknapp
       const fargeKnapp = document.createElement('button');
       fargeKnapp.style.backgroundImage = 'url(./ikon/farge.png)';
-      fargeKnapp.className = 'knapp notatLukka';
+      fargeKnapp.className = 'knapp vanligKnapp';
       fargeKnapp.addEventListener('click', (event) => { event.stopPropagation(); endreFarge(denneData, notatBoks); });
       tittelBoks.appendChild(fargeKnapp);
       
       // + knapp
       const nyKnapp = document.createElement('button');
       nyKnapp.style.backgroundImage = 'url(./ikon/nyttnotat.png)';
-      nyKnapp.className = 'knapp notatLukka';
+      nyKnapp.className = 'knapp vanligKnapp';
       nyKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         const id:string = nyId();
         denneData.underNotat[id] = lagTomtNotat( id , denneData.farge);
         lagreNotat();
         tegnNotat(underNotatBoks,denneData, denneData.underNotat[id]);
-        const notatBoks = document.getElementById(id);
-        if (!notatBoks ) return;
-        opneNotat(notatBoks);
-        fokuser(notatBoks);
+        const denneNotatBoks = document.getElementById(id);
+        if (!denneNotatBoks ) return;
+        opneLukkNotat(id);
+        fokuser(denneNotatBoks);
       });
       tittelBoks.appendChild(nyKnapp);
-}
+
     //notat underboks
     const notat = document.createElement('div');
-    notat.id = denneData.id;
-    notat.className = 'notat notatLukka';
+    notat.className = 'notat';
       
     //undernotat
       const underNotatBoks = document.createElement('div');
