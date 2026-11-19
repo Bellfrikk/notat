@@ -25,7 +25,7 @@ export function tegnNotat( overNotat:HTMLElement, forelderData:Notat|HovedNotat,
       // Tilbakeknapp
       const tilbakeKnapp = document.createElement('button');
       tilbakeKnapp.style.backgroundImage = 'url(./ikon/tilbakepil.png)';
-      tilbakeKnapp.className = 'knapp vanligKnapp søppelKnapp';
+      tilbakeKnapp.className = 'knapp tilbakeKnapp';
       tilbakeKnapp.addEventListener('click', (event) => {
         event.stopPropagation();
         opneLukkNotat(denneData.id);

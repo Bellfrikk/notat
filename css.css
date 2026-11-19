@@ -123,11 +123,13 @@ h1{
 
 .slettaNotat { display: none;}
 .visSøppel .slettaNotat { display: block; }
-.vanligKnapp, .søppelKnapp { display: none;}
+.tilbakeKnapp, .vanligKnapp, .søppelKnapp { display: none;}
+.visNotat.vanligNotat > .tittelBoks > .tilbakeKnapp { display: block;}
 .visNotat.vanligNotat > .tittelBoks > .vanligKnapp { display: block;}
 .visNotat.vanligNotat > .tittelBoks > .søppelKnapp { display: none;}
 .visNotat.vanligNotat > .notat { display: block;}
 
+.visNotat.slettaNotat > .tittelBoks > .tilbakeKnapp { display: block;}
 .visNotat.slettaNotat > .tittelBoks > .vanligKnapp { display: none;}
 .visNotat.slettaNotat > .tittelBoks > .søppelKnapp { display: block;}
 .visNotat.slettaNotat > .notat { display: block;}
