@@ -134,3 +134,9 @@ h1{
 .visNotat.slettaNotat > .tittelBoks > .søppelKnapp { display: block;}
 .visNotat.slettaNotat > .notat { display: block;}
 
+.søppelMenyKnapp { 
+  background : url('./ikon/slett.png') center / contain no-repeat;
+}
+.visSøppel .søppelMenyKnapp { 
+  background : #2dbddbad url('./ikon/slett.png') center / contain no-repeat;
+}

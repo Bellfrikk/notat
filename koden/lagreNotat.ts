@@ -1,6 +1,7 @@
 import { hovedNotat } from "./henteNotat.js";
 import { filId, accessToken } from "./googlePålogging.js";
 import { sorterAlfabetisk } from  "./sortereAlfabetisk.js";
+import { påLogga } from "./topplinje.js";
 
 export function lagreNotat(): void {
   lagreLokalt(hovedNotat);
@@ -14,7 +15,10 @@ function lagreLokalt(data:HovedNotat) {
 }
 
 async function lagreTilGoogleDrive( data: HovedNotat ): Promise<void> {
-  if (!accessToken || !filId)  return;
+  if (!accessToken || !filId) {
+    påLogga(false);
+    return;
+  }
   const tekst = JSON.stringify( data,  null, 2 );
 
   const response = await fetch(

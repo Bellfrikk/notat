@@ -19,7 +19,7 @@
 
   const googleKnapp = document.createElement('button');
   googleKnapp.id = 'googleKnapp';
-  googleKnapp.style.backgroundImage = 'url(./ikon/synk.png)';
+  googleKnapp.style.background = "url(./ikon/synk.png) center / contain no-repeat";
   googleKnapp.className = 'knapp';
   googleKnapp.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -29,13 +29,10 @@
 
  // søppel knapp
   const søppelKnapp = document.createElement('button');
-  søppelKnapp.style.backgroundImage = 'url(./ikon/slett.png)';
-  søppelKnapp.className = 'knapp';
+  søppelKnapp.className = 'knapp søppelMenyKnapp';
   søppelKnapp.addEventListener('click', (event) => {
     event.stopPropagation();
     document.body.classList.toggle('visSøppel');
-   // søppelKnapp.style.backgroundImage = søppelViser ? 'url(./ikon/notat.png)' : 'url(./ikon/slett.png)';
-
   });
   toppLinje.appendChild(søppelKnapp);
 
@@ -77,8 +74,8 @@ export function påLogga(loggaPå:boolean) {
   const googleKnapp = document.getElementById('googleKnapp');
   if (!googleKnapp) return;
   if (loggaPå) {
-    googleKnapp.style.backgroundImage = 'url(./ikon/synkok.png)';
+  googleKnapp.style.background = "#03f4176e url(./ikon/synkok.png) center / contain no-repeat";
   } else {
-    googleKnapp.style.backgroundImage = 'url(./ikon/synk.png)';
+  googleKnapp.style.background = "#f94417bc url(./ikon/synk.png) center / contain no-repeat";
   }
 }

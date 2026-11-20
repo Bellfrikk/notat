@@ -16,8 +16,7 @@ export function søkNotat(hovedNotat, søkjeord) {
                 continue;
             const notatElement = document.getElementById(data.id);
             if (notatElement) {
-                notatElement.classList.remove('notatOpent');
-                notatElement.classList.add('notatLukka');
+                notatElement.classList.remove('visNotat');
                 const boks = notatElement.closest('.notatBoks');
                 const tittel = boks === null || boks === void 0 ? void 0 : boks.querySelector('.tittel');
                 const tekst = boks === null || boks === void 0 ? void 0 : boks.querySelector('.tekst');
@@ -49,14 +48,12 @@ function opneForeldre(element) {
     let forelder = element.parentElement;
     while (forelder) {
         if (forelder.classList.contains('notat')) {
-            forelder.classList.remove('notatLukka');
-            forelder.classList.add('notatOpent');
+            forelder.classList.add('visNotat');
         }
         forelder = forelder.parentElement;
     }
     // Opne sjølve notatet
-    element.classList.remove('notatLukka');
-    element.classList.add('notatOpent');
+    element.classList.add('visNotat');
 }
 function harTreffUnder(data, søk) {
     for (const barn of Object.values(data.underNotat)) {
@@ -74,7 +71,7 @@ function fokuserSøketreff() {
     if (søkeindeks < 0 || søkeindeks >= søketreff.length)
         return;
     const treff = søketreff[søkeindeks];
-    const notatBoks = treff.closest('.notatBoks');
+    const notatBoks = treff.closest('.vanligNotat');
     if (!notatBoks)
         return;
     fokuser(notatBoks);

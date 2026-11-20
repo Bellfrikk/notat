@@ -21,8 +21,7 @@ function gåGjennom(notatliste: Record<string, Notat>): void {
     const notatElement = document.getElementById(data.id);
 
     if (notatElement) {
-      notatElement.classList.remove('notatOpent');
-      notatElement.classList.add('notatLukka');
+      notatElement.classList.remove('visNotat');
 
       const boks = notatElement.closest('.notatBoks') as HTMLElement | null;
       const tittel = boks?.querySelector('.tittel') as HTMLElement | null;
@@ -62,16 +61,14 @@ function opneForeldre(element: HTMLElement): void {
   while (forelder) {
 
     if (forelder.classList.contains('notat')) {
-      forelder.classList.remove('notatLukka');
-      forelder.classList.add('notatOpent');
+      forelder.classList.add('visNotat');
     }
 
     forelder = forelder.parentElement;
   }
 
   // Opne sjølve notatet
-  element.classList.remove('notatLukka');
-  element.classList.add('notatOpent');
+  element.classList.add('visNotat');
 }
 
 
@@ -96,7 +93,7 @@ function fokuserSøketreff(): void {
   if (søkeindeks < 0 || søkeindeks >= søketreff.length) return;
 
   const treff = søketreff[søkeindeks];
-  const notatBoks = treff.closest('.notatBoks') as HTMLElement | null;
+  const notatBoks = treff.closest('.vanligNotat') as HTMLElement | null;
    if (!notatBoks ) return;
   fokuser( notatBoks)
 }

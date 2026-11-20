@@ -1,6 +1,7 @@
 import { hovedNotat } from "./henteNotat.js";
 import { filId, accessToken } from "./googlePålogging.js";
 import { sorterAlfabetisk } from "./sortereAlfabetisk.js";
+import { påLogga } from "./topplinje.js";
 export function lagreNotat() {
     lagreLokalt(hovedNotat);
     lagreTilGoogleDrive(hovedNotat);
@@ -10,8 +11,10 @@ function lagreLokalt(data) {
     console.log('lagra');
 }
 async function lagreTilGoogleDrive(data) {
-    if (!accessToken || !filId)
+    if (!accessToken || !filId) {
+        påLogga(false);
         return;
+    }
     const tekst = JSON.stringify(data, null, 2);
     const response = await fetch(`https://www.googleapis.com/upload/drive/v3/files/${filId}?uploadType=media`, {
         method: 'PATCH',
